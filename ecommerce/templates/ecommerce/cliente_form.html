@@ -1,0 +1,25 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+<div class="card shadow p-4">
+    <h2 class="mb-4">{% if form.instance.pk %}Editar Cliente{% else %}Adicionar Cliente{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="{{ form.user.id_for_label }}" class="form-label">Usuário (ID)</label>
+            {{ form.user }}
+            <small class="form-text text-muted">Apenas IDs de usuários existentes.</small>
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.telefone.id_for_label }}" class="form-label">Telefone</label>
+            {{ form.telefone }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.endereco.id_for_label }}" class="form-label">Endereço</label>
+            {{ form.endereco }}
+        </div>
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a href="{% url 'cliente_list' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

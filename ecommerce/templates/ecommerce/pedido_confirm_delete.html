@@ -1,0 +1,13 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+<div class="card p-4 shadow">
+    <h2 class="card-title">Confirmar Exclusão</h2>
+    <p>Você tem certeza que deseja excluir o pedido #{{ object.id }} do cliente "{{ object.cliente.user.username }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sim, Excluir</button>
+        <a href="{% url 'pedido_list' %}" class="btn btn-secondary">Não, Voltar</a>
+    </form>
+</div>
+{% endblock %}

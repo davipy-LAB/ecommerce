@@ -1,0 +1,24 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+<div class="card shadow p-4">
+    <h2 class="mb-4">Adicionar Pedido</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="{{ form.cliente.id_for_label }}" class="form-label">Cliente</label>
+            {{ form.cliente }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.status.id_for_label }}" class="form-label">Status</label>
+            {{ form.status }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.produtos.id_for_label }}" class="form-label">Produtos</label>
+            {{ form.produtos }}
+        </div>
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a href="{% url 'pedido_list' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

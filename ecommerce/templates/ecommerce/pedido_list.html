@@ -1,0 +1,30 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Lista de Pedidos</h2>
+    <a href="{% url 'pedido_create' %}" class="btn btn-primary">Adicionar Novo Pedido</a>
+</div>
+
+{% if pedidos %}
+<ul class="list-group">
+    {% for pedido in pedidos %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+            <strong>Pedido #{{ pedido.id }}</strong>
+            <small class="text-muted d-block">Cliente: {{ pedido.cliente.user.username }}</small>
+            <small class="text-muted d-block">Data: {{ pedido.data_pedido|date:"d/m/Y H:i" }}</small>
+        </div>
+        <div>
+            <a href="{% url 'pedido_detail' pedido.pk %}" class="btn btn-sm btn-info">Ver Detalhes</a>
+            <a href="{% url 'pedido_delete' pedido.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<div class="alert alert-info" role="alert">
+    Nenhum pedido cadastrado.
+</div>
+{% endif %}
+{% endblock %}
