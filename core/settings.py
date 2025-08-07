@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@@*adn+8r$$-7mw2#2o0j7!2eod0iu0z96txa^sawrmmlov*x(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ecommerce-4dcz.onrender.com']
+ALLOWED_HOSTS = ['ecommerce-4dcz.onrender.com','127.0.0.1']
 CSRF_TRUSTED_ORIGINS = [
     'https://ecommerce-4dcz.onrender.com'
 ]
@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ecommerce',
 ]
+
+AUTH_USER_MODEL = 'ecommerce.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

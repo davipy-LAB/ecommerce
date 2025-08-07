@@ -1,0 +1,14 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+<div class="card p-5 text-center shadow mt-5">
+    <div class="card-body">
+        <h2 class="card-title text-success">Pedido Realizado com Sucesso!</h2>
+        <p class="card-text lead">Obrigado por sua compra, {{ pedido.cliente.user.username }}.</p>
+        <p class="card-text">Seu pedido **#{{ pedido.id }}** foi criado com sucesso.</p>
+        <hr>
+        <a href="{% url 'loja_produtos' %}" class="btn btn-primary mt-3">Voltar para a Loja</a>
+        <a href="{% url 'pedido_detail' pedido.id %}" class="btn btn-secondary mt-3">Ver Detalhes do Pedido</a>
+    </div>
+</div>
+{% endblock %}

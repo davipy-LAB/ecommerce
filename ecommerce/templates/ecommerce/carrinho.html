@@ -1,0 +1,50 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Seu Carrinho</h2>
+    <a href="{% url 'loja_produtos' %}" class="btn btn-outline-secondary">Continuar Comprando</a>
+</div>
+
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if carrinho_itens %}
+<ul class="list-group">
+    {% for produto_id, item in carrinho_itens.items %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+            {% if item.imagem_url %}
+            <img src="{{ item.imagem_url }}" alt="{{ item.nome }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+            {% endif %}
+            <strong>{{ item.nome }}</strong>
+            <small class="text-muted d-block">Quantidade: {{ item.quantidade }}</small>
+        </div>
+        <div>
+            <span class="badge bg-primary rounded-pill">R$ {{ item.preco|floatformat:2 }}</span>
+            <a href="{% url 'adicionar_ao_carrinho' produto_id %}" class="btn btn-sm btn-info ms-2">+1</a>
+            <a href="#" class="btn btn-sm btn-danger ms-2">Remover</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<div class="d-flex justify-content-end mt-3">
+    <h4>Total: R$ {{ total|floatformat:2 }}</h4>
+</div>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+    <a href="{% url 'limpar_carrinho' %}" class="btn btn-danger me-md-2">Limpar Carrinho</a>
+    <a href="{% url 'checkout_pedido' %}" class="btn btn-success">Finalizar Compra</a>
+</div>
+{% else %}
+<div class="alert alert-info" role="alert">
+    Seu carrinho está vazio.
+</div>
+{% endif %}
+{% endblock %}
