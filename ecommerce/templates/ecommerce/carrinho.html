@@ -30,7 +30,7 @@
         <div>
             <span class="badge bg-primary rounded-pill">R$ {{ item.preco|floatformat:2 }}</span>
             <a href="{% url 'adicionar_ao_carrinho' produto_id %}" class="btn btn-sm btn-info ms-2">+1</a>
-            <a href="#" class="btn btn-sm btn-danger ms-2">Remover</a>
+            <a href="{% url 'remover_do_carrinho' produto_id %}" class="btn btn-sm btn-danger ms-2">Remover</a>
         </div>
     </li>
     {% endfor %}
@@ -38,13 +38,11 @@
 <div class="d-flex justify-content-end mt-3">
     <h4>Total: R$ {{ total|floatformat:2 }}</h4>
 </div>
-<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-    <a href="{% url 'limpar_carrinho' %}" class="btn btn-danger me-md-2">Limpar Carrinho</a>
-    <a href="{% url 'checkout_pedido' %}" class="btn btn-success">Finalizar Compra</a>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+    <a href="{% url 'limpar_carrinho' %}" class="btn btn-warning me-md-2">Limpar Carrinho</a>
+    <a href="{% url 'checkout_pedido' %}" class="btn btn-success">Finalizar Pedido</a>
 </div>
 {% else %}
-<div class="alert alert-info" role="alert">
-    Seu carrinho está vazio.
-</div>
+<div class="alert alert-info mt-3">Seu carrinho está vazio.</div>
 {% endif %}
 {% endblock %}

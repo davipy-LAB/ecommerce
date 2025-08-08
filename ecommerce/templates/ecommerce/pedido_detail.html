@@ -5,9 +5,29 @@
     <h2 class="card-title">Detalhes do Pedido #{{ pedido.id }}</h2>
     <hr>
     <p><strong>Cliente:</strong> {{ pedido.cliente.user.username }}</p>
-    <p><strong>Status:</strong> <span class="badge bg-primary">{{ pedido.status }}</span></p>
     <p><strong>Data do Pedido:</strong> {{ pedido.data_pedido|date:"d/m/Y H:i" }}</p>
-    
+
+    <!-- Exibe o status do pedido -->
+    <h4>Status do Pedido: <span class="badge bg-{{ pedido.get_status_display|slugify|default:'secondary' }}">{{ pedido.get_status_display }}</span></h4>
+
+    <!-- Adicionado: Interface para o admin atualizar o status (só aparece para quem tem permissão) -->
+    {% if user.is_authenticated and user.cargo == 'empresa' %}
+    <div class="mt-4">
+        <h4>Alterar Status do Pedido</h4>
+        <form action="{% url 'update_pedido_status' pedido.pk %}" method="post" class="d-flex align-items-center">
+            {% csrf_token %}
+            <select name="status" class="form-select me-2" aria-label="Status do Pedido">
+                {% for status_choice in pedido.STATUS_CHOICES %}
+                    <option value="{{ status_choice.0 }}" {% if pedido.status == status_choice.0 %}selected{% endif %}>
+                        {{ status_choice.1 }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+        </form>
+    </div>
+    {% endif %}
+
     <h4 class="mt-4">Produtos no Pedido</h4>
     {% if pedido.itempedido_set.all %}
     <ul class="list-group mt-2">

@@ -1,0 +1,18 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Meus Pedidos</h2>
+    {% if pedidos %}
+        <ul class="list-group">
+            {% for pedido in pedidos %}
+                <li class="list-group-item">
+                    Pedido #{{ pedido.id }} - Status: {{ pedido.status }} - Data: {{ pedido.data_pedido|date:"d/m/Y H:i" }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="alert alert-info mt-3">Você ainda não fez nenhum pedido.</div>
+    {% endif %}
+</div>
+{% endblock %}

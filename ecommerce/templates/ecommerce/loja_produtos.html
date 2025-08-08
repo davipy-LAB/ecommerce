@@ -23,6 +23,7 @@
     {% for produto in produtos %}
     <div class="col">
         <div class="card h-100 shadow-sm">
+            <!-- Este trecho de código está correto. Ele precisa que o settings.py esteja configurado com as credenciais do Cloudinary. -->
             {% if produto.imagem %}
                 <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.nome }}" style="height: 200px; object-fit: cover;">
             {% endif %}
